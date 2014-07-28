@@ -13,7 +13,7 @@ module Lita
         user, application, branch, environment = message.match(MESSAGE_REGEX).captures
 
         apply_status = { id: "#{application}:#{environment}",
-                         message: "#{application} #{environment}: #{branch} (#{user} @ #{Time.now.to_s})" }
+                         message: "#{application} #{environment}: #{branch} (#{user} @ #{formatted_time})" }
 
         redis.set("server_status:#{apply_status[:id]}", apply_status[:message])
       end
@@ -25,6 +25,10 @@ module Lita
         end
 
         response.reply message.join("\n")
+      end
+
+      def formatted_time
+        Time.now.strftime("%Y-%m-%d %H:%M")
       end
     end
 
