@@ -31,4 +31,9 @@ describe Lita::Handlers::ServerStatus, lita_handler: true do
       expect(replies.last).to include("BATMAN STAGING: AWESOME (Waffle McRib @ #{Time.now.to_s})")
     end
   end
+
+  it "admits when there are no statuses" do
+    send_command("server status")
+    expect(replies.last).to eq("I don't know what state the servers are in.")
+  end
 end
