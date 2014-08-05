@@ -19,12 +19,13 @@ module Lita
       end
 
       def list_statuses(response)
-        message = []
-        redis.keys("server_status*").each do |key|
-          message << redis.get(key)
-        end
+        response.reply status_message
+      end
 
-        response.reply message.join("\n")
+      def status_message
+        messages = redis.keys("server_status*").map { |key| redis.get(key) }
+        messages << "I don't know what state the servers are in." if messages.empty?
+        messages.join("\n")
       end
     end
 
