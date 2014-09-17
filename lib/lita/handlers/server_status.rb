@@ -23,7 +23,7 @@ module Lita
       end
 
       def status_message
-        messages = redis.keys("server_status*").map { |key| redis.get(key) }
+        messages = redis.keys("server_status*").sort.map { |key| redis.get(key) }
         messages << "I don't know what state the servers are in." if messages.empty?
         messages.join("\n")
       end
