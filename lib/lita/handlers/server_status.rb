@@ -1,7 +1,7 @@
 module Lita
   module Handlers
     class ServerStatus < Handler
-      MESSAGE_REGEX = /(.+) is starting deploy of '(.+)' from branch '(.+)' to (.+)/i
+      MESSAGE_REGEX = /(.+) is deploying (.+)\/(.+) to (.+)(\s\(.*)/i
 
       route(MESSAGE_REGEX, :save_status)
       route(/server status/i, :list_statuses, command: true,
