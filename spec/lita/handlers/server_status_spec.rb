@@ -7,8 +7,8 @@ describe Lita::Handlers::ServerStatus, lita_handler: true do
   before(:each) do
     allow_any_instance_of(Lita::Handlers::ServerStatus).to receive(:formatted_time).and_return(formatted_local_time)
   end
-  it { routes("Waffle McRib is deploying fakeapp/master to staging (production).").to(:save_status) }
-  it { routes_command("server status").to(:list_statuses) }
+  it { is_expected.to route("Waffle McRib is deploying fakeapp/master to staging (production).").to(:save_status) }
+  it { is_expected.to route_command("server status").to(:list_statuses) }
 
   it "saves the server status" do
     expect_any_instance_of(Lita::Handlers::ServerStatus).to receive(:save_status)
