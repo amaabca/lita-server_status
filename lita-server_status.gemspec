@@ -1,8 +1,11 @@
 Gem::Specification.new do |spec|
   spec.name          = "lita-server_status"
-  spec.version       = "0.0.3"
-  spec.authors       = ["Michael van den Beuken", "Ruben Estevez", "Jordan Babe", "Mathieu Gilbert", "Ryan Jones", "Darko Dosenovic"]
-  spec.email         = ["michael.beuken@gmail.com", "ruben.a.estevez@gmail.com", "jorbabe@gmail.com", "mathieu.gilbert@ama.ab.ca", "ryan.michael.jones@gmail.com", "darko.dosenovic@ama.ab.ca"]
+  spec.version       = "0.0.4"
+  spec.authors       = ["Michael van den Beuken", "Ruben Estevez", "Jordan Babe", "Mathieu Gilbert", "Ryan Jones", "Darko Dosenovic",
+                        "Jonathan Weyermann", "Jesse Doyle", "Zoie Carnegie"]
+  spec.email         = ["michael.beuken@gmail.com", "ruben.a.estevez@gmail.com", "jorbabe@gmail.com", "mathieu.gilbert@ama.ab.ca",
+                        "ryan.michael.jones@gmail.com", "darko.dosenovic@ama.ab.ca", "Jonathan.Weyermann@ama.ab.ca", "Jesse.Doyle@ama.ab.ca",
+                        "Zoie.Carnegie@ama.ab.ca"]
   spec.description   = %q{Store and list out the statuses of applications}
   spec.summary       = %q{Store and list out the statuses of applications}
   spec.homepage      = "https://github.com/amaabca/lita-server_status"
