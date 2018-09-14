@@ -1,6 +1,13 @@
 module Lita
   module Handlers
     class ServerStatus < Handler
+      route(/.*/, :log_response)
+
+      def log_response(response)
+        Lita.logger.info('=== RESPONSE ===')
+        Lita.logger.info(response.message.body)
+      end
+
       MESSAGE_REGEX = /(.+) is deploying (.+)\/(.+) to (.+)\s.*/i
       route(MESSAGE_REGEX, :save_status)
 
