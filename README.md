@@ -14,9 +14,15 @@ gem "lita-server_status"
 
 No configuration variables needed.
 
-Lita looks for strings following this regex: ```/(.+) is starting deploy of '(.+)' from branch '(.+)' to (.+)/i```
+Lita looks for strings following this regex: ```/(?::eyes:)*\s*(.+) is deploying (.+)\/(.+) to (.+)/i```
 
-Which looks like: 'Waffle McRib is starting deploy of 'BATMAN' from branch 'AWESOME' to STAGING'
+Which looks like:
+
+`:eyes: Tammy Tester is deploying App/Environment to BranchName`
+
+or
+
+`Tammy Tester is deploying App/Environment to BranchName`
 
 ## Usage
 
@@ -27,8 +33,8 @@ List out the server statuses.
 ## Output:
 
 ```
-  BATMAN STAGING: AWESOME (Waffle McRib @ 2014-07-24 12:10:54 -0600)
-  FAKEAPP PRODUCTION: MASTER (Waffle McRib @ 2014-07-24 12:10:54 -0600)
+  App STAGING: Branch (Tammy Tester @ 2014-07-24 12:10:54 -0600)
+  App PRODUCTION: Branch (Tammy Tester @ 2014-07-24 12:10:54 -0600)
 ```
 
 ## License
