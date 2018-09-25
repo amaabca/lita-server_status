@@ -1,7 +1,7 @@
 module Lita
   module Handlers
     class ServerStatus < Handler
-      MESSAGE_REGEX = /(.+) is deploying (.+)\/(.+) to (.+)\s.*/i
+      MESSAGE_REGEX = /:eyes: (.+) is deploying (.+)\/(.+) to (.+)/i
       route(MESSAGE_REGEX, :save_status)
 
       route(/server status/i, :list_statuses, command: true,
@@ -11,21 +11,6 @@ module Lita
       def save_status(response)
         message = response.message.body
         user, application, branch, environment = message.match(MESSAGE_REGEX).captures
-
-        apply_status = { id: "#{application}:#{environment}",
-                         message: "#{application} #{environment}: #{branch} (#{user} @ #{formatted_time})" }
-
-        redis.set("server_status:#{apply_status[:id]}", apply_status[:message])
-      end
-
-      # we have to leave this statement here untill all apps are update to use new capistrano process
-      OLD_MESSAGE_REGEX = /(.+) is starting deploy of '(.+)' from branch '(.+)' to (.+)/i
-      route(OLD_MESSAGE_REGEX, :old_save_status)
-
-      def old_save_status(response)
-        message = response.message.body
-        user, application, branch, environment = message.match(OLD_MESSAGE_REGEX).captures
-
         apply_status = { id: "#{application}:#{environment}",
                          message: "#{application} #{environment}: #{branch} (#{user} @ #{formatted_time})" }
 
