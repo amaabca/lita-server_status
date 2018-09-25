@@ -8,13 +8,18 @@ describe Lita::Handlers::ServerStatus, lita_handler: true do
     allow_any_instance_of(Lita::Handlers::ServerStatus).to receive(:formatted_time).and_return(formatted_local_time)
   end
 
-  context 'New HipChat messaging in place' do
+  context 'New Slack messaging in place' do
     it { is_expected.to route(':eyes: Bobby Marley is deploying fakeapp/staging to red_team_rocks').to(:save_status) }
     it { is_expected.to route_command('server status').to(:list_statuses) }
 
     it 'saves the server status' do
       expect_any_instance_of(Lita::Handlers::ServerStatus).to receive(:save_status)
       send_message(%{:eyes: Bob Marley is deploying fakeapp/staging to red_team_rocks})
+    end
+
+    it 'saves the server status with no :eyes:' do
+      expect_any_instance_of(Lita::Handlers::ServerStatus).to receive(:save_status)
+      send_message(%{Bob Marley is deploying fakerapp/staging to red_team_rocks})
     end
 
     it 'update the server status if it changes' do

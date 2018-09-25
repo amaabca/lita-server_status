@@ -1,12 +1,12 @@
 module Lita
   module Handlers
     class ServerStatus < Handler
-      MESSAGE_REGEX = /:eyes: (.+) is deploying (.+)\/(.+) to (.+)/i
+      MESSAGE_REGEX = %r/(?::eyes:)*\s*(.+) is deploying (.+)\/(.+) to (.+)/i
       route(MESSAGE_REGEX, :save_status)
 
-      route(/server status/i, :list_statuses, command: true,
-            help: { "server status" => "List out the current server statuses." }
-      )
+      route(/server status/i, :list_statuses, command: true, help: {
+              'server status' => 'List out the current server statuses.'
+            })
 
       def save_status(response)
         message = response.message.body
@@ -22,13 +22,13 @@ module Lita
       end
 
       def status_message
-        messages = redis.keys("server_status*").sort.map { |key| redis.get(key) }
-        messages << "I don't know what state the servers are in." if messages.empty?
-        messages.join("\n")
+        messages = redis.keys('server_status*').sort.map { |key| redis.get(key) }
+        messages << 'I don\'t know what state the servers are in.' if messages.empty?
+        messages.join('\n')
       end
 
       def formatted_time
-        Time.now.strftime("%Y-%m-%d %H:%M")
+        Time.now.strftime('%Y-%m-%d %H:%M')
       end
     end
 
